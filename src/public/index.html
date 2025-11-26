@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Event Tickets</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/ui/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Event Ticket Booking</h1>
+      <div class="grid">
+        <section class="card">
+          <h2>Create / Initialize Event (admin)</h2>
+          <label>Event ID <input id="init-event-id" /></label>
+          <label>Tickets <input id="init-tickets" type="number" value="10" /></label>
+          <label>Admin Basic Auth <input id="init-basic" placeholder="admin:password" /></label>
+          <button id="init-btn">Initialize</button>
+          <div id="init-result" class="result"></div>
+        </section>
+
+        <section class="card">
+          <h2>Book Ticket</h2>
+          <label>Event ID <input id="book-event-id" /></label>
+          <label>User ID <input id="book-user-id" /></label>
+          <button id="book-btn">Book</button>
+          <div id="book-result" class="result"></div>
+        </section>
+
+        <section class="card">
+          <h2>Cancel Booking (admin)</h2>
+          <label>Event ID <input id="cancel-event-id" /></label>
+          <label>User ID <input id="cancel-user-id" /></label>
+          <label>Admin Token <input id="cancel-token" placeholder="JWT token" /></label>
+          <button id="cancel-btn">Cancel</button>
+          <div id="cancel-result" class="result"></div>
+        </section>
+
+        <section class="card">
+          <h2>Event Status</h2>
+          <label>Event ID <input id="status-event-id" /></label>
+          <button id="status-btn">Get Status</button>
+          <pre id="status-result" class="result"></pre>
+        </section>
+      </div>
+    </div>
+    <script src="/ui/app.js"></script>
+  </body>
+  </html>
