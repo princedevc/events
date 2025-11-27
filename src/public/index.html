@@ -1,49 +1,125 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Event Tickets</title>
+    <title>EventHub - Discover & Book Events</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="/ui/styles.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Event Ticket Booking</h1>
-      <div class="grid">
-        <section class="card">
-          <h2>Create / Initialize Event (admin)</h2>
-          <label>Event ID <input id="init-event-id" /></label>
-          <label>Tickets <input id="init-tickets" type="number" value="10" /></label>
-          <label>Admin Basic Auth <input id="init-basic" placeholder="admin:password" /></label>
-          <button id="init-btn">Initialize</button>
-          <div id="init-result" class="result"></div>
-        </section>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">EventHub</div>
+        <nav class="nav">
+          <button class="nav-link active">Explore</button>
+          <button class="nav-link">My Events</button>
+          <button class="nav-link">Create Event</button>
+        </nav>
+        <div class="header-actions">
+          <button class="btn-secondary">Sign In</button>
+          <button class="btn-primary">Create Event</button>
+        </div>
+      </div>
+    </header>
 
-        <section class="card">
-          <h2>Book Ticket</h2>
-          <label>Event ID <input id="book-event-id" /></label>
-          <label>User ID <input id="book-user-id" /></label>
-          <button id="book-btn">Book</button>
-          <div id="book-result" class="result"></div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Find Your Next Event</h1>
+        <p>Discover amazing events happening near you</p>
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search events by name, date, or location..." />
+          <button class="btn-search">Search</button>
+        </div>
+      </div>
+    </section>
 
-        <section class="card">
-          <h2>Cancel Booking (admin)</h2>
-          <label>Event ID <input id="cancel-event-id" /></label>
-          <label>User ID <input id="cancel-user-id" /></label>
-          <label>Admin Token <input id="cancel-token" placeholder="JWT token" /></label>
-          <button id="cancel-btn">Cancel</button>
-          <div id="cancel-result" class="result"></div>
-        </section>
+    <!-- Admin Panel -->
+    <section class="admin-panel">
+      <div class="container">
+        <h2>Event Management (Admin)</h2>
+        <div class="admin-grid">
+          <div class="admin-card">
+            <h3>Create Event</h3>
+            <input id="init-event-id" placeholder="Event ID (e.g., tech-conference-2025)" />
+            <input id="init-tickets" type="number" placeholder="Number of tickets" value="100" />
+            <input id="init-basic" placeholder="Admin credentials (admin:password)" />
+            <button id="init-btn" class="btn-primary">Create Event</button>
+            <div id="init-result" class="result"></div>
+          </div>
+          <div class="admin-card">
+            <h3>Event Status</h3>
+            <input id="status-event-id" placeholder="Enter Event ID" />
+            <button id="status-btn" class="btn-primary">Get Status</button>
+            <pre id="status-result" class="result"></pre>
+          </div>
+          <div class="admin-card">
+            <h3>Cancel Booking</h3>
+            <input id="cancel-event-id" placeholder="Event ID" />
+            <input id="cancel-user-id" placeholder="User ID" />
+            <input id="cancel-token" placeholder="Admin JWT Token" />
+            <button id="cancel-btn" class="btn-danger">Cancel Booking</button>
+            <div id="cancel-result" class="result"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section class="card">
-          <h2>Event Status</h2>
-          <label>Event ID <input id="status-event-id" /></label>
-          <button id="status-btn">Get Status</button>
-          <pre id="status-result" class="result"></pre>
-        </section>
+    <!-- Events Section -->
+    <section class="events-section">
+      <div class="container">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="events-grid" id="events-grid">
+          <!-- Events will be populated here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2 id="modal-event-title">Event Title</h2>
+        <div class="modal-body">
+          <div class="modal-left">
+            <img id="modal-event-image" src="" alt="Event" />
+            <div class="event-details">
+              <h3>Event Details</h3>
+              <p id="modal-event-description"></p>
+              <div class="detail-item">
+                <strong>📅 Date:</strong> <span id="modal-event-date"></span>
+              </div>
+              <div class="detail-item">
+                <strong>📍 Location:</strong> <span id="modal-event-location"></span>
+              </div>
+              <div class="detail-item">
+                <strong>👥 Capacity:</strong> <span id="modal-event-capacity"></span>
+              </div>
+              <div class="detail-item">
+                <strong>💰 Price:</strong> <span id="modal-event-price"></span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-right">
+            <div class="booking-form">
+              <h3>Book Ticket</h3>
+              <label>Your Name</label>
+              <input id="book-user-id" type="text" placeholder="Enter your name" />
+              <label>Email</label>
+              <input id="book-user-email" type="email" placeholder="your@email.com" />
+              <label>Phone</label>
+              <input id="book-user-phone" type="tel" placeholder="+1 (555) 000-0000" />
+              <label>Number of Tickets</label>
+              <input id="book-quantity" type="number" value="1" min="1" />
+              <button id="book-btn" class="btn-primary-large">Book Now</button>
+              <div id="book-result" class="result"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
     <script src="/ui/app.js"></script>
   </body>
-  </html>
+</html>

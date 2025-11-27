@@ -76,30 +76,9 @@ function createServer() {
   // health
   app.get('/health', (req, res) => res.json({ ok: true }));
 
-  // root landing page (HTML)
+  // root landing page - redirect to UI
   app.get('/', (req, res) => {
-    res.type('html').send(`
-      <!doctype html>
-      <html>
-      <head>
-        <meta charset="utf-8" />
-        <title>Event Ticket Booking API</title>
-        <style>body{font-family:Arial,Helvetica,sans-serif;line-height:1.6;padding:24px}code{background:#f4f4f4;padding:2px 6px;border-radius:4px}</style>
-      </head>
-      <body>
-        <h1>Event Ticket Booking API</h1>
-        <p>Quick links:</p>
-        <ul>
-          <li><a href="/health">Health</a></li>
-          <li>POST <code>/initialize</code> (protected)</li>
-          <li>POST <code>/book</code></li>
-          <li>POST <code>/cancel</code> (protected)</li>
-          <li>GET <code>/status/:eventId</code></li>
-        </ul>
-        <p>See <code>README.md</code> in the project root for API details and examples.</p>
-      </body>
-      </html>
-    `);
+    res.redirect('/ui/');
   });
 
   // serve frontend UI
